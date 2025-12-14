@@ -1,0 +1,47 @@
+<!-- VIEW: BUDGET -->
+<div id="budget" class="view-section">
+    <!-- Total Budget Health Card -->
+    <div class="grid-3" style="grid-template-columns: 1fr 1fr; margin-bottom:24px;">
+        <div class="card"
+            style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 78, 59, 0.2)); border:1px solid rgba(16, 185, 129, 0.3);">
+            <h4
+                style="color:#6ee7b7; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">
+                Remaining Budget</h4>
+            <div id="budgetRemaining"
+                style="font-size:2.5rem; font-weight:800; color:#fff; text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);">
+                $0.00
+            </div>
+            <div id="budgetStatusText" style="color:#d1fae5; font-size:0.9rem; margin-top:5px;">Set your budget to start
+            </div>
+        </div>
+
+        <div class="card" style="display:flex; flex-direction:column; justify-content:center;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                <span style="color:var(--text-muted);">Total Limit</span>
+                <span id="budgetTotalDisplay" style="color:white; font-weight:600;">$0</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                <span style="color:var(--text-muted);">Actual Spent</span>
+                <span id="budgetSpentDisplay" style="color:#f87171; font-weight:600;">$0</span>
+            </div>
+            <div class="budget-bar" style="height:12px; background:rgba(255,255,255,0.1);">
+                <div id="totalProgressBar" class="budget-fill"
+                    style="width: 0%; background: linear-gradient(90deg, #10b981, #3b82f6);"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Breakdown -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Category Performance</h3>
+            <div style="font-size:0.8rem; color:var(--text-muted);">Spending vs Suggested Limit (20%)</div>
+        </div>
+        <div id="budgetListContainer">
+            <!-- Dynamic Content Here -->
+            <div style="text-align:center; padding:2rem; color:var(--text-muted); font-style:italic;">
+                Add a budget in the settings or startup to see analysis.
+            </div>
+        </div>
+    </div>
+</div>
