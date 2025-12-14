@@ -321,6 +321,9 @@
             <button class="login-btn" onclick="authenticate()">
                 INITIALIZE <ion-icon name="arrow-forward-outline" style="vertical-align:middle;"></ion-icon>
             </button>
+            <div id="login-error"
+                style="color: red; display: none; margin-top: 10px; font-weight: bold; text-shadow: 0 0 5px red;">ACCESS
+                DENIED</div>
 
             <div style="margin-top:20px; font-size:0.8rem; color:#444;">
                 SYSTEM STATUS: <span style="color:var(--neon-green)">ONLINE</span>
@@ -466,18 +469,7 @@
                         </div>
                     </div>
 
-                    <div
-                        style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid #222; padding-bottom:20px;">
-                        <div>
-                            <div style="color:white; font-weight:bold;">NOTIFICATIONS</div>
-                            <div style="color:#666; font-size:0.8rem;">Email alerts on spending</div>
-                        </div>
-                        <div style="width:40px; height:20px; background:#333; border-radius:10px; position:relative;">
-                            <div
-                                style="width:18px; height:18px; background:gray; border-radius:50%; position:absolute; left:1px; top:1px;">
-                            </div>
-                        </div>
-                    </div>
+
 
                     <button class="cyber-action" style="width:100%; margin-top:10px;">RESET SYSTEM KERNEL</button>
                 </div>
@@ -522,7 +514,7 @@
         }
 
         function refreshConfigUI() {
-            const keys = ['neon', 'notif'];
+            const keys = ['neon'];
             keys.forEach(key => {
                 const isActive = localStorage.getItem(`nexus_${key}`) === 'true';
                 const btn = document.getElementById(`btn-${key}`);
@@ -554,26 +546,53 @@
             }
         }
 
-        function authenticate() {
+        async function authenticate() {
             const btn = document.querySelector('.login-btn');
             const inp = document.getElementById('accessCode');
+            const err = document.getElementById('login-error');
 
             btn.innerHTML = 'AUTHENTICATING...';
             btn.style.background = '#fff';
+            err.style.display = 'none';
 
-            setTimeout(() => {
-                document.getElementById('login-screen').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('login-screen').style.display = 'none';
-                    document.getElementById('app-interface').style.display = 'flex';
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ access_code: inp.value })
+                });
+                const result = await response.json();
 
-                    // Init Settings
-                    if (localStorage.getItem('nexus_neon') === null) localStorage.setItem('nexus_neon', 'true');
-                    refreshConfigUI();
+                if (result.status === 'success') {
+                    // SUCCESS
+                    setTimeout(() => {
+                        document.getElementById('login-screen').style.opacity = '0';
+                        setTimeout(() => {
+                            document.getElementById('login-screen').style.display = 'none';
+                            document.getElementById('app-interface').style.display = 'flex';
 
-                    refreshData();
-                }, 800);
-            }, 1000);
+                            // Init Settings
+                            if (localStorage.getItem('nexus_neon') === null) localStorage.setItem('nexus_neon', 'true');
+                            refreshConfigUI();
+
+                            refreshData();
+                        }, 800);
+                    }, 1000);
+                } else {
+                    // FAILED
+                    throw new Error("Access Denied");
+                }
+            } catch (e) {
+                btn.innerHTML = 'INITIALIZE <ion-icon name="arrow-forward-outline" style="vertical-align:middle;"></ion-icon>';
+                btn.style.background = 'var(--neon-green)';
+                err.style.display = 'block';
+
+                // Glitch effect on card
+                const card = document.querySelector('.login-card');
+                card.style.transform = 'translate(5px, 0)';
+                setTimeout(() => card.style.transform = 'translate(-5px, 0)', 50);
+                setTimeout(() => card.style.transform = 'translate(0, 0)', 100);
+            }
         }
 
         // --- CORE LOGIC ---

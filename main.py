@@ -25,6 +25,9 @@ class TransactionRequest(BaseModel):
     description: str
     amount: float
 
+class LoginRequest(BaseModel):
+    access_code: str
+
 class CategoryResponse(BaseModel):
     category: str
     confidence: str = "High"
@@ -69,16 +72,17 @@ def get_summary():
     """Returns spending breakdown for the chart."""
     return database.get_category_summary()
 
-@app.post("/send-report")
-def send_report():
-    """Simulates sending an email report."""
-    # In a real app, you would use smtplib here with os.getenv("SMTP_PASSWORD")
-    summary = database.get_category_summary()
-    total = sum(summary.values())
+@app.post("/login")
+def login(creds: LoginRequest):
+    """Secure Access Protocol Verification"""
+    # Environment variable support for security, default to 'nexus'
+    SECRET_CODE = os.getenv("ACCESS_CODE", "nexus")
     
-    print(f"📧 SENDING EMAIL TO USER: 'Your Total Spending: ${total:.2f}'")
-    return {"status": "sent", "message": f"Report sent! Total spend: ${total:.2f}"}
+    if creds.access_code == SECRET_CODE:
+        return {"status": "success", "token": "authorized_0x99"}
+    else:
+        return {"status": "failed", "message": "ACCESS DENIED"}
 
 if __name__ == "__main__":
-    print("🚀 Server starting! Open this link: http://localhost:8000")
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    print("🚀 Server starting! Open this link: http://localhost:8001")
+    uvicorn.run(app, host="0.0.0.0", port=8001)

@@ -55,7 +55,17 @@ def get_daily_spending() -> Dict[str, float]:
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
     # Extract YYYY-MM-DD
-    cursor.execute('SELECT substr(date, 1, 10) as day, SUM(amount) FROM transactions GROUP BY day ORDER BY day ASC LIMIT 10')
+    # Select last 7 active days.
+    # We subquery to get the latest dates, then order by day ASC for the chart.
+    cursor.execute('''
+        SELECT day, total FROM (
+            SELECT substr(date, 1, 10) as day, SUM(amount) as total
+            FROM transactions
+            GROUP BY day
+            ORDER BY day DESC
+            LIMIT 10
+        ) ORDER BY day ASC
+    ''')
     rows = cursor.fetchall()
     conn.close()
     return {row[0]: row[1] for row in rows}

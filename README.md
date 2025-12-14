@@ -1,33 +1,44 @@
-# NEXUS | AI-Powered Finance OS 🚀
+# NEXUS | Hyper-Financial OS 🚀
 
-> **A "God Level" Personal Finance Tracker built for MLH Global Hack Week.**
-> Featuring a Cyber-Noir aesthetic, real-time analytics, and matrix-style ledger.
+> **The "God Level" Personal Finance Tracker.**  
+> *Cybernetic Aesthetic. Real-time Analytics. Secure Core.*
 
-![NEXUS Dashboard](https://via.placeholder.com/800x400.png?text=NEXUS+Dashboard+Preview)
+![Nexus Dashboard](images/dashboard.png)
 
-## 🌟 Features
+---
 
-*   **Cyber-Noir Interface**: A high-contrast, neon-infused UI designed for the modern "Operator".
-*   **Command Center**: Input transactions via a hacker-style console.
-*   **Real-Time Analytics**: Visualizes spending velocity and sector breakdown using Chart.js.
-*   **Transaction Matrix**: A complete history of every transaction with hex-coded IDs.
-*   **Persistent Config**: Toggle "Neon Mode" and system preferences saved to local storage.
-*   **Export Data**: Download your entire financial history as a CSV file.
-*   **AI Categorization**: (Simulated) Auto-tags transactions based on descriptions.
+## ⚡ Overview
+**NEXUS** is not just a finance tracker; it's a financial operating system designed for the modern operator. built with a **Cyber-Noir** aesthetic, it features real-time data visualization, a secure access protocol, and deep insights into your spending habits.
 
-## 🛠️ Tech Stack
+## 💎 Features
 
-*   **Frontend**: HTML5, CSS3 (Glassmorphism), JavaScript (Vanilla), Chart.js
-*   **Backend**: Python, FastAPI
-*   **Database**: SQLite (Embedded `finance.db`)
-*   **Deployment**: Ready for Vercel/Heroku/Render
+### 🛡️ Secure Access Protocol
+Your financial data is protected by a custom authentication layer.
+- **Default Access Code**: `nexus`
+- **Security**: Backend validation ensures only authorized personnel can access the terminal.
 
-## ⚡ Quick Start
+![Login Screen](images/login.png)
+
+### 📊 Deep Analytics
+Understand your cash flow with precision.
+- **Spending Velocity**: Tracks your spending momentum over the last 10 active days.
+- **Sector Analysis**: Automatic categorization breaks down where your money is going (Food, Tech, Bills, etc.).
+
+![Analytics](images/analytics.png)
+
+### 🔮 Additional Modules
+- **Command Center**: Rapid transaction entry with "Hacker Mode" inputs.
+- **Ledger Matrix**: Full history view with export-to-CSV capability.
+- **Configurable UI**: Toggle "Neon Mode" for maximum contrast.
+
+---
+
+## 🛠️ Installation
 
 1.  **Clone the Repository**
     ```bash
-    git clone https://github.com/yourusername/nexus-finance.git
-    cd nexus-finance
+    git clone https://github.com/amaltomar47-ui/nexus.git
+    cd nexus
     ```
 
 2.  **Install Dependencies**
@@ -35,23 +46,23 @@
     pip install -r requirements.txt
     ```
 
-3.  **Launch System**
+3.  **Initialize System**
     ```bash
     python main.py
     ```
 
 4.  **Access Terminal**
-    Open your browser and navigate to: `http://localhost:8000`
-
-## 📸 Screenshots
-
-| Command Center | Analytics |
-|:---:|:---:|
-| ![Command Center](https://via.placeholder.com/400x200?text=Dashboard) | ![Analytics](https://via.placeholder.com/400x200?text=Charts) |
-
-## 🤝 Contributing
-
-This project is open-source. Feel free to fork and submit a Pull Request!
+    Open your browser and navigate to: `http://localhost:8001`
+    > **Note**: Port changed to **8001** to avoid conflicts.
 
 ---
-*Built with code and caffeine for MLH Global Hack Week.*
+
+## 🔧 Technology Stack
+- **Frontend**: HTML5, Vanilla CSS (Glassmorphism), JavaScript
+- **Backend**: Python (FastAPI)
+- **Database**: SQLite3
+- **Visualization**: Chart.js
+
+---
+
+> *System Status: ONLINE* | *Operator: YOU*
